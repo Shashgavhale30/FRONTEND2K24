@@ -1,54 +1,65 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Notifications System
-    const notificationBtn = document.getElementById('notificationBtn');
-    const notificationsPanel = document.getElementById('notifications');
-    const closeNotifications = document.getElementById('closeNotifications');
+
+        // Dropdown Toggle
+        document.getElementById('userDropdown').addEventListener('click', function() {
+            document.getElementById('dropdownMenu').classList.toggle('active');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('#userDropdown')) {
+                document.getElementById('dropdownMenu').classList.remove('active');
+            }
+        });
+
+        // Sample data for recent submissions
+        const recentSubmissionsData = [
+            { name: 'Dr. Sarah Johnson', department: 'Computer Science', status: 'Approved' },
+            { name: 'Prof. Michael Chen', department: 'Physics', status: 'Pending' },
+            { name: 'Dr. Emily Brown', department: 'Mathematics', status: 'Under Review' }
+        ];
+
+        // Populate recent submissions table
+        function populateRecentSubmissions() {
+            const tbody = document.getElementById('recentSubmissions');
+            tbody.innerHTML = recentSubmissionsData.map(submission => `
+                <tr>
+                    <td>${submission.name}</td>
+                    <td>${submission.department}</td>
+                    <td>${submission.status}</td>
+                </tr>
+            `).join('');
+        }
+
+        // System status update
+        function updateSystemStatus() {
+            const systemStatus = document.getElementById('systemStatus');
+            systemStatus.innerHTML = `
+                <p>Last System Update: ${new Date().toLocaleDateString()}</p>
+                <p>Active Users: 45</p>
+                <p>System Performance: Optimal</p>
+            `;
+        }
+
+        // Quick Action Functions
+        function generateReport() {
+            alert('Generating comprehensive report...');
+        }
+
+        function reviewPending() {
+            alert('Opening pending reviews...');
+        }
+
+        function manageFaculty() {
+            alert('Opening faculty management...');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            populateRecentSubmissions();
+            updateSystemStatus();
+        });
+
+        // Optional: Add a chart using a charting library
+        // You would need to include a charting library like Chart.js
+        // and initialize it here
     
-    // Sample notifications data
-    const notifications = [
-        {
-            id: 1,
-            title: 'Appraisal Deadline',
-            message: 'Your annual appraisal form is due in 15 days.',
-            date: '2024-03-15',
-            unread: true
-        },
-        {
-            id: 2,
-            title: 'New Guidelines',
-            message: 'Review updated guidelines for academic year 2024-25.',
-            date: '2024-03-14',
-            unread: true
-        },
-        {
-            id: 3,
-            title: 'Meeting Reminder',
-            message: 'Faculty meeting scheduled for tomorrow at 10 AM.',
-            date: '2024-03-13',
-            unread: false
-        }
-    ];
-
-    // News data
-    const newsItems = [
-        {
-            id: 1,
-            title: 'New Appraisal Guidelines Released',
-            content: 'Updated guidelines for the academic year 2024-25 are now available.',
-            date: '2024-03-15',
-            isNew: true
-        },
-        {
-            id: 2,
-            title: 'Faculty Development Program',
-            content: 'Register for upcoming FDP starting next month.',
-            date: '2024-03-14',
-            isNew: true
-        }
-    ];
-
-    // Initialize news section
-    function initializeNews() {
-        const newsContainer = document.getElementById('newsContainer');
-        newsItems.forEach(item => {
-            const newsElement = document.
